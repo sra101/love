@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For My Special Person ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.card{
+    background:white;
+    width:350px;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    animation:fade 1s;
+}
+
+.hidden{display:none;}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    margin-top:20px;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.next{background:#ff4d6d;color:white;}
+.accept{background:#28a745;color:white;}
+.reject{background:#444;color:white;position:absolute;}
+
+input{
+    padding:12px;
+    width:80%;
+    border-radius:10px;
+    border:1px solid #ccc;
+    font-size:16px;
+}
+
+.slideshow img{
+    width:250px;
+    height:300px;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);} 
+to{opacity:1;transform:translateY(0);} }
+
+.heart{
+    position:fixed;
+    color:red;
+    font-size:25px;
+    animation:fall 4s linear infinite;
+}
+
+@keyframes fall{0%{transform:translateY(-10vh);}100%{transform:translateY(110vh);}}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="step1">
+<h2>Hey 💙</h2>
+<p> How would you like me to call you, my love? </p>
+<input id="name" type="text">
+<br>
+<button class="next" onclick="step2()">Continue</button>
+</div>
+
+<div class="card hidden" id="step2">
+<h2 id="hello"></h2>
+<p id="msg"></p>
+<button class="next" onclick="step3()">Next →</button>
+</div>
+
+<div class="card hidden" id="step3">
+<h2>One Question...</h2>
+<p>Will you stay with me forever? 🥺</p>
+<div style="height:120px; position:relative;">
+<button class="reject" id="no">Reject ❌</button>
+<button class="accept" onclick="accept()">Accept ❤️</button>
+</div>
+</div>
+
+<div class="card hidden" id="step4">
+<h2>Our Memories ❤️</h2>
+
+<div class="slideshow">
+    <img id="slide" src="photo1.jpg">
+</div>
+
+<p>You and me... always 💞</p>
+<button id="reply">Give My Reply 💌</button>
+</div>
+
+<script>
+let girlName="";
+
+function step2(){
+    girlName=document.getElementById("name").value;
+    if(girlName==""){alert("Please enter your name 😊");return;}
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("step2").classList.remove("hidden");
+    document.getElementById("hello").innerText="Hi "+girlName+" 💖";
+    document.getElementById("msg").innerText="I made something special for you...";
+}
+
+function step3(){
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
+}
+
+const no=document.getElementById("no");
+no.addEventListener("mouseover",()=>{
+    no.style.left=Math.random()*250+"px";
+    no.style.top=Math.random()*100+"px";
+});
+
+function accept(){
+    document.getElementById("step3").classList.add("hidden");
+    document.getElementById("step4").classList.remove("hidden");
+    createHearts();
+    startSlideshow();
+
+    document.getElementById("reply").onclick=function(){
+        window.location.href="mailto:YOURMAIL@gmail.com?subject=My Answer ❤️&body=Hi... this is "+girlName+" 😊%0D%0A%0D%0AMy reply is:";
+    };
+}
+
+function createHearts(){
+    setInterval(()=>{
+        const heart=document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=Math.random()*20+15+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+    },300);
+}
+
+const photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
+let index=0;
+
+function startSlideshow(){
+    setInterval(()=>{
+        index=(index+1)%photos.length;
+        document.getElementById("slide").src=photos[index];
+    },2000);
+}
+</script>
+
+</body>
+</html>
