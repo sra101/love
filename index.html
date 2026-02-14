@@ -75,15 +75,9 @@ to{opacity:1;transform:translateY(0);} }
 
 <body>
 
-<div class="card" id="step1">
-<h2>Hey 💙</h2>
-<p> How would you like me to call you, my love? </p>
-<input id="name" type="text">
-<br>
-<button class="next" onclick="step2()">Continue</button>
-</div>
 
-<div class="card hidden" id="step2">
+
+<div class="card" id="step2">
 <h2 id="hello"></h2>
 <p id="msg"></p>
 <button class="next" onclick="step3()">Next →</button>
@@ -102,7 +96,7 @@ to{opacity:1;transform:translateY(0);} }
 <h2>Our Memories ❤️</h2>
 
 <div class="slideshow">
-    <img id="slide" src="photo1.jpg">
+    <img id="slide" src="images/photo1.jpg" alt="Our photo">
 </div>
 
 <p>You and me... always 💞</p>
@@ -110,7 +104,7 @@ to{opacity:1;transform:translateY(0);} }
 </div>
 
 <script>
-let girlName="";
+let girlName="rukku";
 
 function step2(){
     girlName=document.getElementById("name").value;
@@ -139,7 +133,9 @@ function accept(){
     startSlideshow();
 
     document.getElementById("reply").onclick=function(){
-        window.location.href="mailto:YOURMAIL@gmail.com?subject=My Answer ❤️&body=Hi... this is "+girlName+" 😊%0D%0A%0D%0AMy reply is:";
+        window.location.href="https://wa.me/917989536596?text="+encodeURIComponent("Hi... this is "+girlName+" 😊
+
+My reply is:");
     };
 }
 
@@ -155,7 +151,7 @@ function createHearts(){
     },300);
 }
 
-const photos=["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
+const photos=["images/photo1.jpg","images/photo2.jpg","images/photo3.jpg","images/photo4.jpg"];
 let index=0;
 
 function startSlideshow(){
@@ -164,6 +160,8 @@ function startSlideshow(){
         document.getElementById("slide").src=photos[index];
     },2000);
 }
+document.getElementById("hello").innerText="Hi rukku 💖";
+document.getElementById("msg").innerText="I made something special for you...";
 </script>
 
 </body>
